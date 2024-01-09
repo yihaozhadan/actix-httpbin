@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "597cb60a-2034-4ba3-b965-a1e485d976f4",
+		"name": "actix-httpbin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Status Codes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/status/200",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"status",
+						"200"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "locahost:8080",
+			"type": "default"
+		}
+	]
+}
