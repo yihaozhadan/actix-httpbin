@@ -1,10 +1,10 @@
-use actix_web::{http::{header::HeaderMap, StatusCode}, HttpRequest, Responder, HttpResponse, route, web, routes};
+use actix_web::{http::{header::HeaderMap, StatusCode}, HttpRequest, Responder, HttpResponse, route, web, routes, get};
 use serde::Serialize;
 use serde_json::Value;
 use std::collections::BTreeMap;
 
 #[derive(Serialize)]
-pub struct HttpInfo {
+struct HttpInfo {
     data: String,
     headers: BTreeMap<String, String>,
     json: Option<Value>,
@@ -24,6 +24,9 @@ fn convert_headers(headers: &HeaderMap) -> BTreeMap<String, String> {
     header_hashmap
 }
 
+/**
+ * HTTP Methods
+ */
 #[routes]
 #[delete("/delete")]
 #[get("/get")]
@@ -48,6 +51,9 @@ pub async fn index(req : HttpRequest, text: String) -> impl Responder {
     HttpResponse::Ok().json(info)
 }
 
+/**
+ * Status codes
+ */
 #[route("/status/{status_code}", method="DELETE", method="GET", method="PATCH", method="POST", method="PUT")]
 pub async fn status_codes(path: web::Path<u16>) -> impl Responder {
     let status = StatusCode::from_u16(path.into_inner());
@@ -60,6 +66,50 @@ pub async fn status_codes(path: web::Path<u16>) -> impl Responder {
     } else {
         HttpResponse::Ok().body(status_value.canonical_reason().unwrap_or("Unknown status code"))
     }
+}
+
+/**
+ * Request Inspection
+ */
+#[get("/headers")]
+pub async fn get_request_headers(req : HttpRequest) -> impl Responder {
+    #[derive(Serialize)]
+    struct RequestHeaders {
+        headers: BTreeMap<String, String>,
+    }
+    let headers = req.headers();
+    let req_headers = RequestHeaders {
+        headers: convert_headers(headers),
+    };
+    HttpResponse::Ok().json(req_headers)
+}
+
+#[get("/ip")]
+pub async fn get_ip(req : HttpRequest) -> impl Responder {
+    #[derive(Serialize)]
+    struct Ip {
+        origin: String,
+    }
+    let conn = req.connection_info();
+    let addr = conn.peer_addr();
+    let ip = Ip {
+        origin: addr.unwrap().to_string(),
+    };
+    HttpResponse::Ok().json(ip)
+}
+
+#[get("/user-agent")]
+pub async fn get_user_agent(req : HttpRequest) -> impl Responder {
+    #[derive(Serialize)]
+    struct UserAgent {
+        #[serde(rename="user-agent")]
+        user_agent: String,
+    }
+    let headers = req.headers();
+    let ip = UserAgent {
+        user_agent: headers.get("user-agent").unwrap().to_str().unwrap_or_default().to_string(),
+    };
+    HttpResponse::Ok().json(ip)
 }
 
 #[routes]
