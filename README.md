@@ -11,9 +11,9 @@ cargo run
 Run with Docker
 
 ```sh
-docker build . -t actix-httpbin:0.1.0
+docker build . -t actix-httpbin:0.2.0
 ```
 
 ```sh
-docker run --name actix-httpbin -p 8080:8080 actix-httpbin:0.1.0
+docker run --name actix-httpbin -p 8080:8080 actix-httpbin:0.2.0
 ```
