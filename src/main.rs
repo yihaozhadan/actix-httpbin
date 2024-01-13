@@ -14,6 +14,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_request_headers)
             .service(get_ip)
             .service(get_user_agent)
+            .service(get_cookies)
             .service(anything)
     })
     .bind(("0.0.0.0", 8080))?
