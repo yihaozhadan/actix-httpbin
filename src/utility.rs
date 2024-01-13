@@ -1,7 +1,7 @@
-use actix_web::{http::{header::HeaderMap, StatusCode}, HttpRequest, Responder, HttpResponse, route, web, routes, get, cookie::Cookie};
+use actix_web::{http::{header::HeaderMap, StatusCode}, HttpRequest, Responder, HttpResponse, route, web, routes, get};
 use serde::Serialize;
 use serde_json::Value;
-use std::{collections::BTreeMap, cell::Ref};
+use std::collections::BTreeMap;
 
 #[derive(Serialize)]
 struct HttpInfo {
@@ -23,14 +23,6 @@ fn convert_headers(headers: &HeaderMap) -> BTreeMap<String, String> {
         header_hashmap.entry(k).or_insert_with(String::new).push_str(&v)
     }
     header_hashmap
-}
-
-fn convert_cookies(cookies: Ref<'_, Vec<Cookie<'static>>>) -> BTreeMap<String, String> {
-    let mut cookie_hashmap = BTreeMap::new();
-    for k in &*cookies {
-        cookie_hashmap.insert(k.name().to_owned(), k.value().to_owned());
-    }
-    cookie_hashmap
 }
 
 /**
@@ -120,26 +112,6 @@ pub async fn get_user_agent(req : HttpRequest) -> impl Responder {
     };
     HttpResponse::Ok().json(ip)
 }
-
-/**
- * Cookies
- */
- #[get("/cookies")]
- pub async fn get_cookies(req: HttpRequest) -> impl Responder {
-    #[derive(Serialize)]
-    struct Cookies {
-        cookies: BTreeMap<String, String>,
-    }
-    match req.cookies() {
-        Ok(cookies) => {
-            let req_cookies = Cookies {
-                cookies: convert_cookies(cookies),
-            };
-            HttpResponse::Ok().json(req_cookies)
-        },
-        Err(error) => HttpResponse::BadRequest().body(error.to_string())
-    }
- }
 
 /**
  * Anything
