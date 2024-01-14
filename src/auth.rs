@@ -28,3 +28,25 @@ pub async fn basic_auth(req: HttpRequest, path: web::Path<(String, String)>) -> 
         None => HttpResponse::Unauthorized().json(BasicAuthResponse{ authenticated: false, user:user })
     }
 }
+
+#[get("/bearer")]
+pub async fn bearer(req: HttpRequest) -> impl Responder {
+    #[derive(Serialize)]
+    struct BearerAuthResponse {
+        authenticated: bool,
+        token: String,
+    }
+    let headers = req.headers();
+    match headers.get("Authorization") {
+        Some(auth_header) => {
+            let bearer_auth_str = String::from_utf8_lossy(auth_header.as_bytes()).into_owned().trim().to_string();
+            let auth_str = &bearer_auth_str[7..];
+            if bearer_auth_str.starts_with("Bearer ") && !auth_str.is_empty() {
+                HttpResponse::Ok().json(BearerAuthResponse{ authenticated: true, token: auth_str.to_owned() })
+            } else {
+                HttpResponse::Unauthorized().json(BearerAuthResponse{ authenticated: false, token: String::from("") })
+            }
+        },
+        None => HttpResponse::Unauthorized().json(BearerAuthResponse{ authenticated: false, token: String::from("") })
+    }
+}
