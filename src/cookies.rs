@@ -9,6 +9,7 @@ struct Cookies {
 
 /**
  * Cookies
+ * Creates, reads, and deletes Cookies
  */
 #[get("/cookies")]
 pub async fn get_cookies(req: HttpRequest) -> impl Responder {

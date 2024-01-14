@@ -1,7 +1,9 @@
 mod utility;
+mod auth;
 mod cookies;
 
 use crate::utility::*;
+use crate::auth::*;
 use crate::cookies::*;
 use actix_web::{middleware, App, HttpServer};
 
@@ -12,6 +14,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .service(index)
+            .service(basic_auth)
             .service(status_codes)
             .service(get_request_headers)
             .service(get_ip)
