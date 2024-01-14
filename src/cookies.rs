@@ -1,4 +1,4 @@
-use actix_web::{get, HttpRequest, HttpResponse, Responder, HttpResponseBuilder, http::StatusCode, cookie::Cookie};
+use actix_web::{get, HttpRequest, HttpResponse, Responder, HttpResponseBuilder, http::StatusCode, cookie::Cookie, web};
 use serde::Serialize;
 use std::collections::BTreeMap;
 
@@ -47,6 +47,27 @@ pub async fn set_cookies(req: HttpRequest) -> impl Responder {
                 cookies: cookie_hashmap,
             };
             res.json(res_cookies)
+        },
+        Err(error) => HttpResponse::BadRequest().body(error.to_string())
+    }
+}
+
+#[get("/cookies/set/{name}/{value}")]
+pub async fn set_cookie(req: HttpRequest, path: web::Path<(String, String)>) -> impl Responder {
+    match req.cookies() {
+        Ok(cookies) => {
+            let mut cookie_hashmap = BTreeMap::new();
+            for k in &*cookies {
+                cookie_hashmap.insert(k.name().to_owned(), k.value().to_owned());
+            }
+            let (name, value) = path.into_inner();
+            cookie_hashmap.insert(name.to_owned(), value.to_owned());
+            let req_cookies = Cookies {
+                cookies: cookie_hashmap,
+            };
+            let mut res = HttpResponseBuilder::new(StatusCode::OK);
+            res.cookie(Cookie::build(name, value).finish());
+            res.json(req_cookies)
         },
         Err(error) => HttpResponse::BadRequest().body(error.to_string())
     }
