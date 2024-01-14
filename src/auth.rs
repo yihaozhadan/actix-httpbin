@@ -40,9 +40,12 @@ pub async fn bearer(req: HttpRequest) -> impl Responder {
     match headers.get("Authorization") {
         Some(auth_header) => {
             let bearer_auth_str = String::from_utf8_lossy(auth_header.as_bytes()).into_owned().trim().to_string();
+            if bearer_auth_str.len() < 7 {
+                return HttpResponse::Unauthorized().json(BearerAuthResponse{ authenticated: false, token: String::from("") })
+            }
             let auth_str = &bearer_auth_str[7..];
-            if bearer_auth_str.starts_with("Bearer ") && !auth_str.is_empty() {
-                HttpResponse::Ok().json(BearerAuthResponse{ authenticated: true, token: auth_str.to_owned() })
+            if bearer_auth_str.starts_with("Bearer ") {
+                HttpResponse::Ok().json(BearerAuthResponse{ authenticated: true, token: auth_str.to_string() })
             } else {
                 HttpResponse::Unauthorized().json(BearerAuthResponse{ authenticated: false, token: String::from("") })
             }

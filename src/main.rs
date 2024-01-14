@@ -15,6 +15,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Logger::default())
             .service(index)
             .service(basic_auth)
+            .service(bearer)
             .service(status_codes)
             .service(get_request_headers)
             .service(get_ip)
