@@ -1,27 +1,758 @@
 {
 	"info": {
-		"_postman_id": "597cb60a-2034-4ba3-b965-a1e485d976f4",
+		"_postman_id": "0fd52dd1-ee9d-4e6b-ba2d-3c4b2c7eda52",
 		"name": "actix-httpbin",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1222058"
 	},
 	"item": [
 		{
-			"name": "Status Codes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/status/200",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"status",
-						"200"
+			"name": "HTTP Methods",
+			"item": [
+				{
+					"name": "GET Method",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/get",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Method",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/get",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"get"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "285"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 14 Nov 2024 03:44:51 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"\",\n    \"headers\": {\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate, br\",\n        \"connection\": \"keep-alive\",\n        \"host\": \"localhost:8080\",\n        \"postman-token\": \"0bf1579d-33d3-4bdb-9f8a-bcf287894c00\",\n        \"user-agent\": \"PostmanRuntime/7.42.0\"\n    },\n    \"json\": null,\n    \"origin\": \"127.0.0.1\",\n    \"url\": \"http://localhost:8080/get\"\n}"
+						}
 					]
+				},
+				{
+					"name": "POST Method",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "36",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/post",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Method",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "John Doe",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "36",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/post",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "381"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "date",
+									"value": "Sun, 17 Nov 2024 03:53:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"name=John%20Doe&age=36\",\n    \"headers\": {\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate, br\",\n        \"connection\": \"keep-alive\",\n        \"content-length\": \"22\",\n        \"content-type\": \"application/x-www-form-urlencoded\",\n        \"host\": \"localhost:8080\",\n        \"postman-token\": \"ba60cef2-7e0c-49b6-a38f-b308b36d92f5\",\n        \"user-agent\": \"PostmanRuntime/7.42.0\"\n    },\n    \"json\": null,\n    \"origin\": \"127.0.0.1\",\n    \"url\": \"http://localhost:8080/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE Method",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/delete",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Method",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/put",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"put"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Method",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/patch",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"patch"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Request Inspeciton",
+			"item": [
+				{
+					"name": "Get headers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/headers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"headers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IP",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ip",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Agent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user-agent",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user-agent"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Response Inspection",
+			"item": [
+				{
+					"name": "Cache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "If-Modified-Since",
+								"value": "Thu, 14 Nov 2024 04:25:14 GMT",
+								"type": "text"
+							},
+							{
+								"key": "If-None-Match",
+								"value": "bfc13a64729c4290ef5b2c2730249c88ca92d82d",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/cache",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cache"
+							]
+						},
+						"description": "Inspect the response data like caching and headers."
+					},
+					"response": []
+				},
+				{
+					"name": "Set Cache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "If-Modified-Since",
+								"value": "Wed, 13 Nov 2024 09:49:00 GMT",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "If-None-Match",
+								"value": "bfc13a64729c4290ef5b2c2730249c88ca92d82d",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/cache/:value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cache",
+								":value"
+							],
+							"variable": [
+								{
+									"key": "value",
+									"value": "20",
+									"description": "Cache for n seconds"
+								}
+							]
+						},
+						"description": "Inspect the response data like caching and headers."
+					},
+					"response": []
+				},
+				{
+					"name": "Set eTag",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "If-None-Match",
+								"value": "custometagvalues",
+								"type": "text"
+							},
+							{
+								"key": "If-Match",
+								"value": "custometagvalues",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/etag/:value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"etag",
+								":value"
+							],
+							"variable": [
+								{
+									"key": "value",
+									"value": "custometagvalue",
+									"description": "ETag value"
+								}
+							]
+						},
+						"description": "Inspect the response data like caching and headers."
+					},
+					"response": []
+				},
+				{
+					"name": "Response headers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/response-headers?name=joe&age=3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"response-headers"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "joe"
+								},
+								{
+									"key": "age",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Response headers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/response-headers?name=joe&age=3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"response-headers"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "joe"
+								},
+								{
+									"key": "age",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status Codes",
+			"item": [
+				{
+					"name": "200",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/status/:status_code",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"status",
+								":status_code"
+							],
+							"variable": [
+								{
+									"key": "status_code",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "201",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/status/:status_code",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"status",
+								":status_code"
+							],
+							"variable": [
+								{
+									"key": "status_code",
+									"value": "201"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/status/:status_code",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"status",
+								":status_code"
+							],
+							"variable": [
+								{
+									"key": "status_code",
+									"value": "204"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/status/:status_code",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"status",
+								":status_code"
+							],
+							"variable": [
+								{
+									"key": "status_code",
+									"value": "204"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "202",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/status/:status_code",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"status",
+								":status_code"
+							],
+							"variable": [
+								{
+									"key": "status_code",
+									"value": "202"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Anything",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get with path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything/:anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything",
+								":anything"
+							],
+							"variable": [
+								{
+									"key": "anything",
+									"value": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post with path",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything/:anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything",
+								":anything"
+							],
+							"variable": [
+								{
+									"key": "anything",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put with path",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything/:anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything",
+								":anything"
+							],
+							"variable": [
+								{
+									"key": "anything",
+									"value": "age"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch with path",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything/:anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything",
+								":anything"
+							],
+							"variable": [
+								{
+									"key": "anything",
+									"value": "price"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete with path",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/anything/:anything",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"anything",
+								":anything"
+							],
+							"variable": [
+								{
+									"key": "anything",
+									"value": "product"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -29,6 +760,7 @@
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
+				"packages": {},
 				"exec": [
 					""
 				]
@@ -38,6 +770,7 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
+				"packages": {},
 				"exec": [
 					""
 				]
@@ -47,8 +780,8 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "locahost:8080",
-			"type": "default"
+			"value": "localhost:8080",
+			"type": "string"
 		}
 	]
 }
