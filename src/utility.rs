@@ -119,18 +119,18 @@ pub async fn get_user_agent(req : HttpRequest) -> impl Responder {
  */
 
 #[get("/cache")]
-pub async fn cache(req: HttpRequest, text: String) -> impl Responder {
-    let headers = req.headers();
+pub async fn cache(_req: HttpRequest, text: String) -> impl Responder {
+    let headers = _req.headers();
     let if_modified_since = headers.get("If-Modified-Since");
     let if_none_match = headers.get("If-None-Match");
     if if_modified_since.is_some() || if_none_match.is_some() {
         HttpResponse::NotModified().finish()
     } else {
-        let conn = req.connection_info();
-        let headers = req.headers();
+        let conn = _req.connection_info();
+        let headers = _req.headers();
         let host = conn.host();
-        let path = req.path();
-        let query = req.query_string();
+        let path = _req.path();
+        let query = _req.query_string();
         let addr = conn.peer_addr();
         let info = HttpInfo {
             data: text.clone(), 
@@ -145,31 +145,31 @@ pub async fn cache(req: HttpRequest, text: String) -> impl Responder {
 }
 
 #[get("/cache/{value}")]
-pub async fn set_cache(req: HttpRequest, value: web::Path<u64>) -> impl Responder {
+pub async fn set_cache(_req: HttpRequest, value: web::Path<u64>) -> impl Responder {
     let seconds = value.into_inner();
     let cache_control = format!("max-age={}", seconds);
     HttpResponse::Ok()
-        .header("Cache-Control", cache_control)
+        .append_header(("Cache-Control", cache_control))
         .finish()
 }
 
 #[get("/etag/{etag}")]
-pub async fn set_etag(req: HttpRequest, etag: web::Path<String>) -> impl Responder {
+pub async fn set_etag(_req: HttpRequest, etag: web::Path<String>) -> impl Responder {
     let etag = etag.into_inner();
     HttpResponse::Ok()
-        .header("Etag", etag)
+        .append_header(("Etag", etag))
         .finish()
 }
 
 #[routes]
 #[get("/response-headers")]
 #[post("/response-headers")]
-pub async fn set_response_headers(req: HttpRequest) -> impl Responder {
+pub async fn set_response_headers(_req: HttpRequest) -> impl Responder {
     let mut response = HttpResponse::Ok();
-    let query_str = req.query_string();
+    let query_str = _req.query_string();
     for pair in query_str.split('&') {
         if let Some((key, value)) = pair.split_once('=') {
-            response.set_header(key, value);
+            response.append_header((key, value));
         }
     }
     response.finish()
